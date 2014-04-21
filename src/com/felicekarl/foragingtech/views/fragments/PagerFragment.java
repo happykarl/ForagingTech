@@ -6,6 +6,7 @@ import com.felicekarl.foragingtech.listeners.UpdateFlipForwardButtonListener;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -24,8 +25,11 @@ public class PagerFragment extends BaseFragment implements OnClickListener, Upda
 	private PagerAdapter mPagerAdapter;
 	private ViewPager mPager;
 	private Button[] btnFooterPagers;
+	private PagerSlidePageFragment[] slideFragments;
 	
 	private FlipForwardButtonListener mFlipForwardButtonListener;
+	
+	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +95,7 @@ public class PagerFragment extends BaseFragment implements OnClickListener, Upda
 			break;
 		case R.id.footer_pager2:
 			mPager.setCurrentItem(1);
+			slideFragments[1].initMapSelector();
 			break;
 		case R.id.footer_pager3:
 			mPager.setCurrentItem(2);
@@ -120,7 +125,7 @@ public class PagerFragment extends BaseFragment implements OnClickListener, Upda
 	private class SlidePagerAdapter extends FragmentStatePagerAdapter implements UpdateFlipForwardButtonListener {
 		private Context context = null;
 		private FlipForwardButtonListener mFlipForwardButtonListener;
-		private PagerSlidePageFragment[] slideFragments;
+		
         public SlidePagerAdapter(Context context, FragmentManager mFragmentManager, FlipForwardButtonListener mFlipForwardButtonListener) {
             super(mFragmentManager);
             this.context = context;
@@ -155,6 +160,10 @@ public class PagerFragment extends BaseFragment implements OnClickListener, Upda
 	public void resetFragment() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String getCurMapFile() {
+		return slideFragments[1].getCurMapFile();
 	}
 	
 }

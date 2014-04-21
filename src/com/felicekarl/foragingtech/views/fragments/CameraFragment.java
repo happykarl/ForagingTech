@@ -199,7 +199,7 @@ public class CameraFragment extends BaseFragment implements TextureView.SurfaceT
 
 	@Override
 	public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-		if (camMode.equals(CAMERAMODE.FLYING)) {
+		if (camMode != null && camMode.equals(CAMERAMODE.FLYING)) {
 			if ( (System.currentTimeMillis() - startMs) > 50 ) {
 				video = mTextureView.getBitmap(imageWidth, imageHeight);
 				startMs = System.currentTimeMillis();

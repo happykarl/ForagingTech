@@ -1,5 +1,10 @@
 package com.felicekarl.foragingtech.views.fragments;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +39,7 @@ import android.graphics.Rect;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -44,6 +50,9 @@ import android.widget.ZoomControls;
 
 public class MapFragment extends BaseFragment implements LocationListener {
 	private static final String TAG = MapFragment.class.getSimpleName();
+	
+	private static final String MAP_FILE = "MAP_FILE";
+	private String mapFile;
 	
 	//The minimum distance to change updates in metters
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; //10 metters
@@ -87,21 +96,57 @@ public class MapFragment extends BaseFragment implements LocationListener {
 		return new MapFragment();
 	}
 	
+	public static MapFragment create(String mapFile) {
+		MapFragment fragment = new MapFragment();
+        Bundle args = new Bundle();
+        args.putString(MAP_FILE, mapFile);
+        fragment.setArguments(args);
+        return fragment;
+    }
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+        	mapFile = getArguments().getString(MAP_FILE);
+        }
+        if (mapFile == null || mapFile == "") {
+        	File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/maps", "blank.map");
+        	if (file.exists()) {
+        		mapFile = file.getAbsolutePath();
+        	} else {
+        		int resourceId = getActivity().getResources().getIdentifier("delaware", "raw", getActivity().getPackageName());
+            	InputStream is = getActivity().getResources().openRawResource(resourceId);
+            	try {
+            		OutputStream out = new FileOutputStream(file);
+                    byte buf[] = new byte[1024];
+                    int len;
+                    while((len = is.read(buf)) > 0) {
+                    	out.write(buf,0,len);
+                    }
+                    out.close();
+                    is.close();
+                    mapFile = file.getAbsolutePath();
+            	} catch (IOException e){
+            		e.printStackTrace();
+            	}
+            	
+        	}
+        }
+        Log.d(TAG, "mapFile: " + mapFile);
     }
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	view = (ViewGroup) inflater.inflate(R.layout.fragment_map, container, false);
     	
-    	initMapView();
+    	initMapView(mapFile);
     	
     	return view;
     }
 	
-	public void initMapView() {
+	public void initMapView(String mapFile) {
+		Log.d(TAG, "mapFile: " + mapFile);
 		// 1. Get the MapView from the Layout xml - mandatory
         mapView = (EditableMapView) view.findViewById(R.id.mapView);
         
@@ -114,7 +159,7 @@ public class MapFragment extends BaseFragment implements LocationListener {
         // read filename from extras
 //        Bundle b = getIntent().getExtras();
 //        String mapFile = b.getString("selectedFile");
-        String mapFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/map/georgia.map";
+        //String mapFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/map/georgia.map";
 
         JobTheme renderTheme = MapsforgeRasterDataSource.InternalRenderTheme.OSMARENDER;
         MapsforgeRasterDataSource dataSource = new MapsforgeRasterDataSource(new EPSG3857(), 0, 20, mapFile, renderTheme);
@@ -564,7 +609,7 @@ public class MapFragment extends BaseFragment implements LocationListener {
 	
 	public void updateUserCurPos() {
 		if (!isGPSEnabled && !isNetworkEnabled) {
-			// no network provider is enabled
+			Log.d(TAG, "CANNOT FIND CUR POSITION!");
 		} else {
 			// if GPS Enabled get lat/long using GPS Services
 			if (isGPSEnabled) {
@@ -594,6 +639,15 @@ public class MapFragment extends BaseFragment implements LocationListener {
 
 	public MapPos getDroneCurPos() {
 		return droneCurPoint.getMapPos();
+	}
+
+	public void changeMap(String mapFile) {
+		Log.d(TAG, "change mapFile: " + mapFile);
+		JobTheme renderTheme = MapsforgeRasterDataSource.InternalRenderTheme.OSMARENDER;
+        MapsforgeRasterDataSource dataSource = new MapsforgeRasterDataSource(new EPSG3857(), 0, 20, mapFile, renderTheme);
+        mapLayer = new RasterLayer(dataSource, 1044);
+
+        mapView.getLayers().setBaseLayer(mapLayer);
 	}
 
 }

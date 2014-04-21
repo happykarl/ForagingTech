@@ -22,78 +22,80 @@ public final class R {
         public static final int btn_footer_pager3=0x7f020008;
         public static final int btn_image_save=0x7f020009;
         public static final int btn_land_unpressed=0x7f02000a;
-        public static final int btn_mode_off=0x7f02000b;
-        public static final int btn_mode_on=0x7f02000c;
-        public static final int btn_play_pressed=0x7f02000d;
-        public static final int btn_play_unpressed=0x7f02000e;
-        public static final int btn_show_video_unpressed=0x7f02000f;
-        public static final int btn_takeoff_unpressed=0x7f020010;
-        public static final int btn_takephoto_unpressed=0x7f020011;
-        public static final int btn_test_unpressed=0x7f020012;
-        public static final int ic_launcher=0x7f020013;
-        public static final int instruction_flying_mode=0x7f020014;
-        public static final int instruction_navigating_mode=0x7f020015;
-        public static final int joystick_halo=0x7f020016;
-        public static final int joystick_manuel=0x7f020017;
-        public static final int marker_green=0x7f020018;
-        public static final int marker_line=0x7f020019;
-        public static final int marker_line_arrow=0x7f02001a;
-        public static final int marker_point=0x7f02001b;
-        public static final int marker_point_north_1=0x7f02001c;
-        public static final int marker_red=0x7f02001d;
-        public static final int sky_small=0x7f02001e;
-        public static final int splash_logo=0x7f02001f;
+        public static final int btn_mode_check=0x7f02000b;
+        public static final int btn_mode_off=0x7f02000c;
+        public static final int btn_mode_on=0x7f02000d;
+        public static final int btn_play_pressed=0x7f02000e;
+        public static final int btn_play_unpressed=0x7f02000f;
+        public static final int btn_show_video_unpressed=0x7f020010;
+        public static final int btn_takeoff_unpressed=0x7f020011;
+        public static final int btn_takephoto_unpressed=0x7f020012;
+        public static final int btn_test_unpressed=0x7f020013;
+        public static final int ic_launcher=0x7f020014;
+        public static final int instruction_flying_mode=0x7f020015;
+        public static final int instruction_navigating_mode=0x7f020016;
+        public static final int joystick_halo=0x7f020017;
+        public static final int joystick_manuel=0x7f020018;
+        public static final int marker_green=0x7f020019;
+        public static final int marker_line=0x7f02001a;
+        public static final int marker_line_arrow=0x7f02001b;
+        public static final int marker_point=0x7f02001c;
+        public static final int marker_point_north_1=0x7f02001d;
+        public static final int marker_red=0x7f02001e;
+        public static final int sky_small=0x7f02001f;
+        public static final int splash_logo=0x7f020020;
     }
     public static final class id {
-        public static final int btn_back=0x7f07000e;
-        public static final int btn_debug=0x7f07000f;
-        public static final int btn_emergency=0x7f070014;
-        public static final int btn_image_mode1=0x7f070005;
-        public static final int btn_image_mode2=0x7f070006;
-        public static final int btn_image_mode3=0x7f070007;
-        public static final int btn_image_mode4=0x7f070008;
-        public static final int btn_image_save=0x7f07000b;
-        public static final int btn_photo_save=0x7f07000d;
-        public static final int btn_play=0x7f070029;
-        public static final int btn_reset_path=0x7f07001f;
-        public static final int btn_set_path=0x7f070020;
-        public static final int btn_start_navigating=0x7f070022;
-        public static final int btn_take_off=0x7f070021;
-        public static final int btn_takeoff=0x7f070011;
-        public static final int btn_takeoff_land_toggle=0x7f07001e;
-        public static final int btn_takephoto=0x7f070013;
-        public static final int btn_test=0x7f070012;
-        public static final int btn_toggle_video=0x7f070010;
-        public static final int camera_image_view=0x7f07000a;
-        public static final int camera_image_view_wrappter=0x7f070009;
-        public static final int camera_photo_view_wrappter=0x7f07000c;
-        public static final int camera_texture_view=0x7f070003;
-        public static final int camera_texture_view_wrappter=0x7f070002;
-        public static final int content_container=0x7f070015;
-        public static final int controller_left_joystick=0x7f070017;
-        public static final int controller_left_joystick_wrapper=0x7f070016;
-        public static final int controller_menu=0x7f07001d;
-        public static final int controller_menu_wrapper=0x7f07001c;
-        public static final int controller_right_joystick=0x7f07001a;
-        public static final int controller_right_joystick_wrapper=0x7f070019;
-        public static final int footer_pager1=0x7f07002a;
-        public static final int footer_pager2=0x7f07002b;
-        public static final int footer_pager3=0x7f07002c;
-        public static final int left_joystick=0x7f070018;
-        public static final int ll_image_mode=0x7f070004;
-        public static final int main=0x7f070000;
-        public static final int mainView=0x7f070023;
-        public static final int mapView=0x7f070024;
-        public static final int pager=0x7f070028;
-        public static final int right_joystick=0x7f07001b;
-        public static final int seekBar=0x7f070026;
-        public static final int textView=0x7f070027;
-        public static final int textView1=0x7f070001;
-        public static final int zoomcontrols=0x7f070025;
+        public static final int btn_back=0x7f08000e;
+        public static final int btn_debug=0x7f08000f;
+        public static final int btn_emergency=0x7f080014;
+        public static final int btn_image_mode1=0x7f080005;
+        public static final int btn_image_mode2=0x7f080006;
+        public static final int btn_image_mode3=0x7f080007;
+        public static final int btn_image_mode4=0x7f080008;
+        public static final int btn_image_save=0x7f08000b;
+        public static final int btn_photo_save=0x7f08000d;
+        public static final int btn_play=0x7f080029;
+        public static final int btn_reset_path=0x7f08001f;
+        public static final int btn_set_path=0x7f080020;
+        public static final int btn_start_navigating=0x7f080022;
+        public static final int btn_take_off=0x7f080021;
+        public static final int btn_takeoff=0x7f080011;
+        public static final int btn_takeoff_land_toggle=0x7f08001e;
+        public static final int btn_takephoto=0x7f080013;
+        public static final int btn_test=0x7f080012;
+        public static final int btn_toggle_video=0x7f080010;
+        public static final int camera_image_view=0x7f08000a;
+        public static final int camera_image_view_wrappter=0x7f080009;
+        public static final int camera_photo_view_wrappter=0x7f08000c;
+        public static final int camera_texture_view=0x7f080003;
+        public static final int camera_texture_view_wrappter=0x7f080002;
+        public static final int content_container=0x7f080015;
+        public static final int controller_left_joystick=0x7f080017;
+        public static final int controller_left_joystick_wrapper=0x7f080016;
+        public static final int controller_menu=0x7f08001d;
+        public static final int controller_menu_wrapper=0x7f08001c;
+        public static final int controller_right_joystick=0x7f08001a;
+        public static final int controller_right_joystick_wrapper=0x7f080019;
+        public static final int footer_pager1=0x7f08002a;
+        public static final int footer_pager2=0x7f08002b;
+        public static final int footer_pager3=0x7f08002c;
+        public static final int left_joystick=0x7f080018;
+        public static final int ll_image_mode=0x7f080004;
+        public static final int main=0x7f080000;
+        public static final int mainView=0x7f080023;
+        public static final int mapView=0x7f080024;
+        public static final int pager=0x7f080028;
+        public static final int right_joystick=0x7f08001b;
+        public static final int seekBar=0x7f080026;
+        public static final int sp_map_select=0x7f08002d;
+        public static final int textView=0x7f080027;
+        public static final int textView1=0x7f080001;
+        public static final int zoomcontrols=0x7f080025;
     }
     public static final class integer {
-        public static final int card_flip_time_full=0x7f050000;
-        public static final int card_flip_time_half=0x7f050001;
+        public static final int card_flip_time_full=0x7f060000;
+        public static final int card_flip_time_half=0x7f060001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -113,19 +115,22 @@ public final class R {
         public static final int fragment_pager_slide_page3=0x7f03000e;
         public static final int fragment_splash=0x7f03000f;
     }
+    public static final class raw {
+        public static final int delaware=0x7f040000;
+    }
     public static final class string {
-        public static final int activate_mode=0x7f060004;
-        public static final int app_name=0x7f060000;
-        public static final int back_to_menu=0x7f060005;
-        public static final int btn_footer_flying=0x7f060001;
-        public static final int btn_footer_navigating=0x7f060002;
-        public static final int btn_footer_setting=0x7f060003;
-        public static final int emergency=0x7f060006;
+        public static final int activate_mode=0x7f070004;
+        public static final int app_name=0x7f070000;
+        public static final int back_to_menu=0x7f070005;
+        public static final int btn_footer_flying=0x7f070001;
+        public static final int btn_footer_navigating=0x7f070002;
+        public static final int btn_footer_setting=0x7f070003;
+        public static final int emergency=0x7f070006;
     }
     public static final class style {
-        public static final int ActionBarCompat=0x7f040002;
-        public static final int ActionBarEmergencyButton=0x7f040000;
-        public static final int ActionBarImage=0x7f040001;
+        public static final int ActionBarCompat=0x7f050002;
+        public static final int ActionBarEmergencyButton=0x7f050000;
+        public static final int ActionBarImage=0x7f050001;
         /** 
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
@@ -138,21 +143,22 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f040012;
-        public static final int FooterPager=0x7f040003;
-        public static final int FooterPagerButton=0x7f040004;
-        public static final int fragmentContentFlying=0x7f04000c;
-        public static final int fragmentContentNavigating=0x7f04000d;
-        public static final int fragmentContentPage=0x7f04000b;
-        public static final int fragmentContentSetting=0x7f04000e;
-        public static final int fragmentDebug=0x7f04000f;
-        public static final int fragmentDebugText=0x7f040010;
-        public static final int fragmentSlidePage=0x7f040007;
-        public static final int fragmentSlidePage1=0x7f040008;
-        public static final int fragmentSlidePage2=0x7f040009;
-        public static final int fragmentSlidePage3=0x7f04000a;
-        public static final int fragmentText=0x7f040006;
-        public static final int mainTheme=0x7f040011;
-        public static final int splashTheme=0x7f040005;
+        public static final int AppBaseTheme=0x7f050013;
+        public static final int BigText=0x7f050005;
+        public static final int FooterPager=0x7f050003;
+        public static final int FooterPagerButton=0x7f050004;
+        public static final int fragmentContentFlying=0x7f05000d;
+        public static final int fragmentContentNavigating=0x7f05000e;
+        public static final int fragmentContentPage=0x7f05000c;
+        public static final int fragmentContentSetting=0x7f05000f;
+        public static final int fragmentDebug=0x7f050010;
+        public static final int fragmentDebugText=0x7f050011;
+        public static final int fragmentSlidePage=0x7f050008;
+        public static final int fragmentSlidePage1=0x7f050009;
+        public static final int fragmentSlidePage2=0x7f05000a;
+        public static final int fragmentSlidePage3=0x7f05000b;
+        public static final int fragmentText=0x7f050007;
+        public static final int mainTheme=0x7f050012;
+        public static final int splashTheme=0x7f050006;
     }
 }

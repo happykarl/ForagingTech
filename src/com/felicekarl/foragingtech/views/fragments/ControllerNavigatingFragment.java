@@ -6,12 +6,14 @@ import com.felicekarl.foragingtech.listeners.ControllerNavigatingFragmentButtonL
 import com.felicekarl.foragingtech.listeners.UpdateConfiguringPathListener;
 import com.felicekarl.foragingtech.listeners.UpdateControllerNavigatingFragmentButtonListener;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ControllerNavigatingFragment extends BaseFragment implements OnClickListener,
 		UpdateConfiguringPathListener, UpdateControllerNavigatingFragmentButtonListener {
@@ -35,11 +37,16 @@ public class ControllerNavigatingFragment extends BaseFragment implements OnClic
 	}
 	
 	public void setNavigatingMode(NAVIGATINGMODE mode) {
+		final Drawable mode_off= getActivity().getResources().getDrawable(R.drawable.btn_mode_off);
+		mode_off.setBounds(0, 0, 40, 40);
+		final Drawable mode_check= getActivity().getResources().getDrawable(R.drawable.btn_mode_check);
+		mode_check.setBounds(0, 0, 40, 40);
 		this.mode = mode;
 		if (mode.equals(NAVIGATINGMODE.CONFIGURING)) {
 			getActivity().runOnUiThread(new Runnable(){
     			@Override
     			public void run() {
+    				btn_start_navigating.setCompoundDrawables(mode_off, null, null, null);
     				btn_start_navigating.setText("Start Navigating");
     			}
         	});
@@ -47,6 +54,7 @@ public class ControllerNavigatingFragment extends BaseFragment implements OnClic
 			getActivity().runOnUiThread(new Runnable(){
     			@Override
     			public void run() {
+    				btn_start_navigating.setCompoundDrawables(mode_off, null, null, null);
     				btn_start_navigating.setText("Start Navigating");
     			}
         	});
@@ -54,6 +62,10 @@ public class ControllerNavigatingFragment extends BaseFragment implements OnClic
 			getActivity().runOnUiThread(new Runnable(){
     			@Override
     			public void run() {
+    				// change image
+    				btn_reset_path.setCompoundDrawables(mode_check, null, null, null);
+    				btn_set_path.setCompoundDrawables(mode_check, null, null, null);
+    				btn_start_navigating.setCompoundDrawables(mode_check, null, null, null);
     				btn_start_navigating.setText("Stop Navigating");
     			}
         	});
@@ -143,11 +155,16 @@ public class ControllerNavigatingFragment extends BaseFragment implements OnClic
 	}
 
 	public void setIsFlying(boolean isFlying) {
+		final Drawable mode_off= getActivity().getResources().getDrawable(R.drawable.btn_mode_off);
+		mode_off.setBounds(0, 0, 40, 40);
+		final Drawable mode_check= getActivity().getResources().getDrawable(R.drawable.btn_mode_check);
+		mode_check.setBounds(0, 0, 40, 40);
 		if (isFlying) {
 			getActivity().runOnUiThread(new Runnable(){
 				@Override
 				public void run() {
 					btn_take_off.setText("Landing");
+					btn_take_off.setCompoundDrawables(mode_check, null, null, null);
 				}
 	    	});
 		} else {
@@ -155,10 +172,52 @@ public class ControllerNavigatingFragment extends BaseFragment implements OnClic
 				@Override
 				public void run() {
 					btn_take_off.setText("Take Off");
+					btn_take_off.setCompoundDrawables(mode_off, null, null, null);
 				}
 	    	});
 		}
 		
+	}
+	
+	public void setUIResetPath() {
+		getActivity().runOnUiThread(new Runnable(){
+			@Override
+			public void run() {
+				Drawable mode_off= getActivity().getResources().getDrawable(R.drawable.btn_mode_off);
+				mode_off.setBounds(0, 0, 40, 40);
+				Drawable mode_check= getActivity().getResources().getDrawable(R.drawable.btn_mode_check);
+				mode_check.setBounds(0, 0, 40, 40);
+				// change image
+				btn_reset_path.setCompoundDrawables(mode_check, null, null, null);
+				btn_set_path.setCompoundDrawables(mode_off, null, null, null);
+				btn_start_navigating.setCompoundDrawables(mode_off, null, null, null);
+				// set Text
+				btn_reset_path.setText("Path Reset");
+				btn_set_path.setText("Configure Path");
+				btn_start_navigating.setText("Start Navigating");
+				
+			}
+    	});
+	}
+	
+	public void setUISetPath() {
+		getActivity().runOnUiThread(new Runnable(){
+			@Override
+			public void run() {
+				Drawable mode_off= getActivity().getResources().getDrawable(R.drawable.btn_mode_off);
+				mode_off.setBounds(0, 0, 40, 40);
+				Drawable mode_check= getActivity().getResources().getDrawable(R.drawable.btn_mode_check);
+				mode_check.setBounds(0, 0, 40, 40);
+				// change image
+				btn_reset_path.setCompoundDrawables(mode_check, null, null, null);
+				btn_set_path.setCompoundDrawables(mode_check, null, null, null);
+				btn_start_navigating.setCompoundDrawables(mode_off, null, null, null);
+				// set Text
+				btn_set_path.setText("Path Configured");
+				btn_start_navigating.setText("Start Navigating");
+				
+			}
+    	});
 	}
 
 }

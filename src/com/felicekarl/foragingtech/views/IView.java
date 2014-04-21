@@ -24,6 +24,8 @@ public interface IView extends UpdateFlipForwardButtonListener, UpdateController
 	public void setNavigatingMode(NAVIGATINGMODE mode);
 	public List<MapPos> getPath();
 	
+	public String getCurMapFile();
+	public void changeMap(String mapFile);
 	public void setDroneCurPos(double lat, double lon);
 	public MapPos getDroneCurPos();
 	public void updateUserCurPos();

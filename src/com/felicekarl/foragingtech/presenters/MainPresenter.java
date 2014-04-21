@@ -16,6 +16,7 @@ import com.felicekarl.ardrone.managers.navdata.listeners.AttitudeListener;
 import com.felicekarl.ardrone.managers.navdata.listeners.GpsListener;
 import com.felicekarl.ardrone.managers.navdata.listeners.StateListener;
 import com.felicekarl.foragingtech.ForagingTechConstraint;
+import com.felicekarl.foragingtech.activities.MainActivity;
 import com.felicekarl.foragingtech.listeners.*;
 import com.felicekarl.foragingtech.models.IModel;
 import com.felicekarl.foragingtech.views.IView;
@@ -23,14 +24,19 @@ import com.felicekarl.foragingtech.views.IView.TypeView;
 import com.felicekarl.foragingtech.views.fragments.ControllerNavigatingFragment.NAVIGATINGMODE;
 import com.nutiteq.components.MapPos;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Toast;
 
 public class MainPresenter implements Runnable {
 	private static final String TAG = MainPresenter.class.getSimpleName();
+	
 	
 	private static final int SPLASH_TIME = 2000;
 	private int timeElapsed = 0;
@@ -70,6 +76,8 @@ public class MainPresenter implements Runnable {
         thread.start();
 	}
 	
+	
+	
 	private void initListeners() {
 		/* add flip page from menu to content */
 		view.updateFlipForwardButtonListener(new FlipForwardButtonListener() {
@@ -84,13 +92,20 @@ public class MainPresenter implements Runnable {
 						Toast.makeText(context, "Fail to connect Drone. Check the Wi-Fi again.", Toast.LENGTH_SHORT).show();
 					}
 				} else if (pageNumber == 1) {
-					initDrone();
-					if(mARDrone.isConnected()) {
-						Toast.makeText(context, "Drone is successfully connected.", Toast.LENGTH_SHORT).show();
-						view.setView(TypeView.NAVIGATINGMODE);
+					if (view.getCurMapFile() != null) {
+						Log.d(TAG, "view.getCurMapFile(): " + view.getCurMapFile());
+						//view.changeMap(view.getCurMapFile());
+						initDrone();
+						if(mARDrone.isConnected()) {
+							Toast.makeText(context, "Drone is successfully connected.", Toast.LENGTH_SHORT).show();
+							view.setView(TypeView.NAVIGATINGMODE);
+						} else {
+							Toast.makeText(context, "Fail to connect Drone. Check the Wi-Fi again.", Toast.LENGTH_SHORT).show();
+						}
 					} else {
-						Toast.makeText(context, "Fail to connect Drone. Check the Wi-Fi again.", Toast.LENGTH_SHORT).show();
+						Toast.makeText(context, "Map is not selected. Please select the .map file.", Toast.LENGTH_SHORT).show();
 					}
+					
 				} else if (pageNumber == 2) {
 					
 				}
@@ -105,12 +120,12 @@ public class MainPresenter implements Runnable {
 				BufferedOutputStream bos = null;
 				FileOutputStream fos = null;
 				try {
-					File dir = new File(ForagingTechConstraint.defaultPath);
+					File dir = new File(ForagingTechConstraint.defaultPhotoPath);
 					if(!dir.isDirectory()){
 						dir.mkdirs();
 					}
 					String filename = ForagingTechConstraint.PT + "_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-					fos = new FileOutputStream(ForagingTechConstraint.defaultPath + filename + ".jpg");
+					fos = new FileOutputStream(ForagingTechConstraint.defaultPhotoPath + filename + ".jpg");
 		        	bos = new BufferedOutputStream(fos);	
 					Bitmap bmp = view.getCameraBitmap();
 					bmp.compress(Bitmap.CompressFormat.JPEG, 90, bos);
@@ -230,12 +245,12 @@ public class MainPresenter implements Runnable {
 				BufferedOutputStream bos = null;
 				FileOutputStream fos = null;
 				try {
-					File dir = new File(ForagingTechConstraint.defaultPath);
+					File dir = new File(ForagingTechConstraint.defaultPhotoPath);
 					if(!dir.isDirectory()){
 						dir.mkdirs();
 					}
 					String filename = ForagingTechConstraint.IG + "_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-					fos = new FileOutputStream(ForagingTechConstraint.defaultPath + filename + ".jpg");
+					fos = new FileOutputStream(ForagingTechConstraint.defaultPhotoPath + filename + ".jpg");
 		        	bos = new BufferedOutputStream(fos);	
 					Bitmap bmp = view.getImageBitmap();
 					bmp.compress(Bitmap.CompressFormat.JPEG, 90, bos);
@@ -260,12 +275,12 @@ public class MainPresenter implements Runnable {
 				BufferedOutputStream bos = null;
 				FileOutputStream fos = null;
 				try {
-					File dir = new File(ForagingTechConstraint.defaultPath);
+					File dir = new File(ForagingTechConstraint.defaultPhotoPath);
 					if(!dir.isDirectory()){
 						dir.mkdirs();
 					}
 					String filename = ForagingTechConstraint.PT + "_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-					fos = new FileOutputStream(ForagingTechConstraint.defaultPath + filename + ".jpg");
+					fos = new FileOutputStream(ForagingTechConstraint.defaultPhotoPath + filename + ".jpg");
 		        	bos = new BufferedOutputStream(fos);	
 					Bitmap bmp = view.getCameraBitmap();
 					bmp.compress(Bitmap.CompressFormat.JPEG, 90, bos);

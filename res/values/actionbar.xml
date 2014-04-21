@@ -53,4 +53,12 @@
 		<item name="android:textColorHint">#fff</item>
 		<item name="android:textSize">30sp</item>
 	</style>
+	
+    <style name="BigText">
+		<item name="android:paddingLeft">10dp</item>
+		<item name="android:fontFamily">sans-serif</item>
+		<item name="android:textColor">#fff</item>
+		<item name="android:textColorHint">#fff</item>
+		<item name="android:textSize">30sp</item>
+	</style>
 </resources>

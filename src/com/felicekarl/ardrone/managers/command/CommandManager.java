@@ -319,7 +319,7 @@ public abstract class CommandManager extends AbstractManager {
 	}
 	
 	public void move3DNav(int speedX, int speedY, int speedZ, int speedSpin) {
-		int maxSpeed = 20;
+		int maxSpeed = 15;
 		if (speedX > maxSpeed)
 			speedX = maxSpeed;
 		else if (speedX < -maxSpeed)

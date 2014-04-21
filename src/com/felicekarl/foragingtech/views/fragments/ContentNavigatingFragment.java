@@ -1,5 +1,6 @@
 package com.felicekarl.foragingtech.views.fragments;
 
+import java.io.File;
 import java.util.List;
 
 import com.felicekarl.foragingtech.R;
@@ -13,7 +14,9 @@ import com.felicekarl.foragingtech.views.fragments.ControllerNavigatingFragment.
 import com.nutiteq.components.MapPos;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +27,22 @@ public class ContentNavigatingFragment extends BaseFragment
 		implements UpdateContentActionBarFragmentButtonListener,
 		UpdateControllerNavigatingFragmentButtonListener {
 	private static final String TAG = ContentNavigatingFragment.class.getSimpleName();
+	public static final String ARG_MAP = "map";
 	
 	private ContentActionBarFragment mContentActionBarFragment;
 	private ContentActionBarFragmentButtonListener mContentActionBarFragmentButtonListener;
 	private ControllerNavigatingFragmentButtonListener mControllerNavigatingFragmentButtonListener;
 	private ControllerNavigatingFragment mControllerNavigatingFragment;
 	private MapFragment mapFragment;
+	
+	/**
+	 * SharedPreferences.
+	 */
+    private SharedPreferences preferences;
+    /**
+	 * SharedPreferences.Editor.
+	 */
+    private SharedPreferences.Editor editor;
 	
 	private List<MapPos> path;
 	
@@ -51,8 +64,16 @@ public class ContentNavigatingFragment extends BaseFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	view = (ViewGroup) inflater.inflate(R.layout.fragment_content_navigating, container, false);
     	/* add map fragment */
-    	mapFragment = MapFragment.create();
-    	getChildFragmentManager().beginTransaction().add(R.id.content_container, mapFragment).commit();
+        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        editor = preferences.edit();
+        String mapPath = preferences.getString(ARG_MAP, "");
+        File file = new File(mapPath);
+        if (file.exists()) {
+        	mapFragment = MapFragment.create(mapPath);
+        } else {
+        	mapFragment = MapFragment.create();
+        }
+        getChildFragmentManager().beginTransaction().add(R.id.content_container, mapFragment).commit();
     	/* add content actionbar fragment */
     	mContentActionBarFragment = ContentActionBarFragment.create();
     	getChildFragmentManager().beginTransaction().add(R.id.content_container, mContentActionBarFragment).commit();
@@ -60,11 +81,15 @@ public class ContentNavigatingFragment extends BaseFragment
     	/* add navigating controller */
     	mControllerNavigatingFragment = ControllerNavigatingFragment.create();
     	getChildFragmentManager().beginTransaction().add(R.id.content_container, mControllerNavigatingFragment).commit();
+    	
+    	mControllerNavigatingFragment.updateControllerNavigatingFragmentButtonListener(mControllerNavigatingFragmentButtonListener);
     	mControllerNavigatingFragment.updateConfiguringPathListener(new ConfiguringPathListener() {			
 			@Override
 			public void savePath() {
 				if (mControllerNavigatingFragment.getNavigatingMode().equals(NAVIGATINGMODE.CONFIGURING)) {
 					path = mapFragment.getPath();
+					mControllerNavigatingFragment.setUISetPath();
+					Toast.makeText(getActivity(), "Nav Path is configured.", Toast.LENGTH_SHORT).show();
 	//				for(MapPos pos : path) {
 	//					Log.d(TAG, pos.toString());
 	//				}
@@ -76,13 +101,15 @@ public class ContentNavigatingFragment extends BaseFragment
 			public void resetPath() {
 				if (mControllerNavigatingFragment.getNavigatingMode().equals(NAVIGATINGMODE.CONFIGURING)) {
 					mapFragment.resetPath();
+					mControllerNavigatingFragment.setUIResetPath();
+					Toast.makeText(getActivity(), "Nav Path is reset.", Toast.LENGTH_SHORT).show();
 				} else if (mControllerNavigatingFragment.getNavigatingMode().equals(NAVIGATINGMODE.NAVIGATING)) {
 					Toast.makeText(getActivity(), "Stop Navigating to reset path.", Toast.LENGTH_SHORT).show();
 				}
 				
 			}
 		});
-    	mControllerNavigatingFragment.updateControllerNavigatingFragmentButtonListener(mControllerNavigatingFragmentButtonListener);
+    	
     	
     	slideUpFragment();
     	
@@ -145,6 +172,10 @@ public class ContentNavigatingFragment extends BaseFragment
 
 	public void setIsFlying(boolean isFlying) {
 		mControllerNavigatingFragment.setIsFlying(isFlying);
+	}
+
+	public void changeMap(String mapFile) {
+		mapFragment.changeMap(mapFile);
 	}
 
 }

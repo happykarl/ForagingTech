@@ -13,7 +13,9 @@ import com.nutiteq.components.MapPos;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Environment;
 import android.view.Surface;
 
 public class MainView implements IView {
@@ -93,6 +95,8 @@ public class MainView implements IView {
 			//mCameraFragment.setCameraSmallScreen();
 			mCameraFragment.setFrameColor("#6a00ff");
 			mCameraFragment.setCameraMode(CAMERAMODE.NAVIGATING);
+	        
+			changeMap(getCurMapFile());
 			
 			mPagerFragment.toggle(false, true, DIRECTION.BOTTOM);
 			mSplashFragment.toggle(false, false, DIRECTION.TOP);
@@ -150,8 +154,8 @@ public class MainView implements IView {
 
 	@Override
 	public void setIsFlying(boolean isFlying) {
-		mControllerFragment.setIsFlying(isFlying);
-		mContentNavigatingFragment.setIsFlying(isFlying);
+		if(mControllerFragment != null)			mControllerFragment.setIsFlying(isFlying);
+		if(mContentNavigatingFragment != null)	mContentNavigatingFragment.setIsFlying(isFlying);
 	}
 
 	@Override
@@ -207,5 +211,15 @@ public class MainView implements IView {
 	@Override
 	public MapPos getDroneCurPos() {
 		return mContentNavigatingFragment.getDroneCurPos();
+	}
+
+	@Override
+	public void changeMap(String mapFile) {
+		mContentNavigatingFragment.changeMap(mapFile);
+	}
+
+	@Override
+	public String getCurMapFile() {
+		return mPagerFragment.getCurMapFile();
 	}
 }
