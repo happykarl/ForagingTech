@@ -296,7 +296,7 @@ public abstract class CommandManager extends AbstractManager {
 	}
 	
 	public void move3D(int speedX, int speedY, int speedZ, int speedSpin) {
-		int maxSpeed = 100;
+		int maxSpeed = 50;
 		if (speedX > maxSpeed)
 			speedX = maxSpeed;
 		else if (speedX < -maxSpeed)
@@ -305,10 +305,10 @@ public abstract class CommandManager extends AbstractManager {
 			speedY = maxSpeed;
 		else if (speedY < -maxSpeed)
 			speedY = -maxSpeed;
-		if (speedZ > 100)
-			speedZ = 100;
-		else if (speedZ < -100)
-			speedZ = -100;
+		if (speedZ > maxSpeed)
+			speedZ = maxSpeed;
+		else if (speedZ < -maxSpeed)
+			speedZ = -maxSpeed;
 
 		command = "AT*PCMD=" + SEQ + ",1," + intOfFloat(-speedY / 100.0f) + ","
 				+ intOfFloat(-speedX / 100.0f) + ","

@@ -128,10 +128,10 @@ public class ControllerFragment extends BaseFragment implements UpdateController
 					}else{
 						radius = (float) (centerX * 0.9);
 					}
-					int speedXRate = (int) (Math.abs(Math.abs(x - centerX) / radius) * 100);
-					int speedYRate = (int) (Math.abs(Math.abs(y - centerY) / radius) * 100);
-					if(speedXRate >= 100) speedXRate = 100;
-					if(speedYRate >= 100) speedYRate = 100;
+					int speedXRate = (int) (Math.abs(Math.abs(x - centerX) / radius) * Math.abs(Math.abs(x - centerX) / radius) * 50);
+					int speedYRate = (int) (Math.abs(Math.abs(y - centerY) / radius) * Math.abs(Math.abs(y - centerY) / radius) * 50);
+					if(speedXRate >= 50) speedXRate = 50;
+					if(speedYRate >= 50) speedYRate = 50;
 					
 					if (Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2) < Math.pow(radius, 2)) {
 						// update joystick image position
@@ -188,7 +188,7 @@ public class ControllerFragment extends BaseFragment implements UpdateController
 	private class RightJoystickListener implements OnTouchListener {
 		// Delay Timer
 		private long lastPressProcessed = 0;
-		private static final long SENSOR_DELAY = 5;
+		private static final long SENSOR_DELAY = 10;
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
 			int action = event.getAction();
@@ -213,8 +213,8 @@ public class ControllerFragment extends BaseFragment implements UpdateController
 					}else{
 						radius = (float) (centerX * 0.9);
 					}
-					int speedXRate = (int) (Math.abs(Math.abs(x - centerX) / radius) * 100);
-					int speedYRate = (int) (Math.abs(Math.abs(y - centerY) / radius) * 100);
+					int speedXRate = (int) (Math.abs(Math.abs(x - centerX) / radius) * Math.abs(Math.abs(x - centerX) / radius) * 100);
+					int speedYRate = (int) (Math.abs(Math.abs(y - centerY) / radius) * Math.abs(Math.abs(y - centerY) / radius) * 100);
 					if(speedXRate >= 100) speedXRate = 100;
 					if(speedYRate >= 100) speedYRate = 100;
 					
